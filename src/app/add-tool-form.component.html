@@ -1,0 +1,106 @@
+<div class="col-md-6">
+  <form (ngSubmit)="save()" #addToolForm="ngForm">
+
+    <div class="form-group">
+      <label for="entryName">工具名称</label>
+      <input type="text" class="form-control" id="entryName" [(ngModel)]="entryName" name="entryName" placeholder="名称">
+    </div>
+
+    <div *ngFor="let dependency of dependencies; let i = index">
+      <label>依赖{{i+1}}</label>
+      <div class="form-group">
+        <label for="groupId[{{i}}]">GroupId</label>
+        <input type="text" class="form-control" [(ngModel)]="dependency.groupId" name="groupId[{{i}}]" placeholder="groupId">
+      </div>
+      <div class="form-group">
+        <label for="artifactId[{{i}}]">ArtifactId</label>
+        <input type="text" class="form-control" [(ngModel)]="dependency.artifactId" name="artifactId[{{i}}]" placeholder="artifactId">
+      </div>
+      <div class="form-group">
+        <label for="version[{{i}}]">Version</label>
+        <input type="text" class="form-control" [(ngModel)]="dependency.version" name="version[{{i}}]" placeholder="version">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-default" (click)="removeDependency(i)">remove</button>
+      </div>
+    </div>
+
+    <div>
+      <label>依赖</label>
+      <div class="form-group">
+        <label for="tempGroupId">GroupId</label>
+        <input type="text" class="form-control" [(ngModel)]="depTemp.groupId" id="tempGroupId" name="tempGroupId" placeholder="groupId">
+      </div>
+      <div class="form-group">
+        <label for="tempArtifactId">ArtifactId</label>
+        <input type="text" class="form-control" [(ngModel)]="depTemp.artifactId" id="tempArtifactId" name="tempArtifactId" placeholder="artifactId">
+      </div>
+      <div class="form-group">
+        <label for="tempVersion">Version</label>
+        <input type="text" class="form-control" [(ngModel)]="depTemp.version" id="tempVersion" name="tempVersion" placeholder="version">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-default" name="button" (click)="addDependency()">添加依赖</button>
+      </div>
+    </div>
+
+    <div *ngFor="let parameter of parameters; let i = index">
+      <label>参数{{i+1}}</label>
+      <div class="form-group">
+        <label for="parameter{{i}}.name">参数名</label>
+        <input type="text" class="form-control" id="parameter{{i}}.name" [(ngModel)]="parameter.name" name="paramName[{{i}}]" placeholder="name">
+      </div>
+      <div class="form-group">
+        <label for="parameter{{i}}.show">展示名</label>
+        <input type="text" class="form-control" [(ngModel)]="parameter.show" name="paramShow[{{i}}]" placeholder="show">
+      </div>
+      <div class="form-group">
+        <label for="parameter{{i}}.type">参数类型</label>
+        <select class="form-control" id="parameter{{i}}.type" name="paramType[{{i}}]" [(ngModel)]="parameter.type">
+          <option *ngFor="let type of paramTypes" [value]="type">{{type}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-default" (click)="removeDependency(i)">remove</button>
+      </div>
+    </div>
+
+    <div>
+      <label>参数</label>
+      <div class="form-group">
+        <label for="tempName">参数名</label>
+        <input type="text" class="form-control" [(ngModel)]="paramTemp.name" name="tempName" placeholder="name">
+      </div>
+      <div class="form-group">
+        <label for="tempShow">展示名</label>
+        <input type="text" class="form-control" [(ngModel)]="paramTemp.show" name="tempShow" placeholder="show">
+      </div>
+      <div class="form-group">
+        <label for="tempType">参数类型</label>
+        <select class="form-control" name="tempType" [(ngModel)]="paramTemp.type">
+          <option *ngFor="let type of paramTypes" [value]="type">{{type}}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-default" (click)="addParameter()">add</button>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="code">代码</label>
+      <textarea class="form-control" id="code" name="code" [(ngModel)]="code" rows="5"></textarea>
+    </div>
+
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" [(ngModel)]="isPublic" name="isPublic"> 是否公开
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button type="submit" (click)="clickMe()" class="btn btn-default">Submit</button>
+    </div>
+  </form>
+</div>
