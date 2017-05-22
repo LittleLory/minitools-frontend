@@ -9,12 +9,16 @@ import { ToolService } from './tool.service'
 import { AppComponent } from './app.component';
 import {TopNavComponent} from  './top-nav.component';
 import {AddToolFormComponent} from './add-tool-form.component';
+import {ToolBoxComponent} from './toolbox.component';
+import {ToolBoardComponent} from './tool-board.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavComponent,
-    AddToolFormComponent
+    AddToolFormComponent,
+    ToolBoxComponent,
+    ToolBoardComponent
   ],
   imports: [
     BrowserModule,

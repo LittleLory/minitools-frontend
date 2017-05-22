@@ -44,13 +44,14 @@ export class Dependency {
 }
 
 
-export class AddToolForm {
+export class Tool {
   constructor(
     public entryName: string,
     public parameters: Parameter[],
     public dependencies: Dependency[],
     public code: string,
     public belongId: number,
+    public belongName: string,
     public isPublic: boolean
   ) {  }
 }

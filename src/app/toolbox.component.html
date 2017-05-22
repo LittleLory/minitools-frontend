@@ -1,0 +1,15 @@
+<div class="col-md-6" style="margin-top:10px;">
+  <h2>{{toolName}}</h2>
+  <form>
+    <div class="form-group" *ngFor="let param of parameters; let i = index">
+      <label for="param{{i}}">{{param.show}}</label>
+      <input type="text" class="form-control" id="param{{i}}" placeholder="参数值" name="param{{i}}" [(ngModel)]="values[i]">
+    </div>
+    <div class="form-group">
+      <label for="result{{toolId}}">结果</label>
+      <textarea id="result{{toolId}}" rows="8" cols="80">{{result}}</textarea>
+    </div>
+    <button type="button" class="btn btn-default" (click)="invoke()">执行</button>
+    {{values}}
+  </form>
+</div>

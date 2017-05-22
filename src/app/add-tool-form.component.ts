@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AddToolForm,  Parameter, Dependency} from './Bean';
+import { Parameter, Dependency} from './Bean';
 import {Logger} from './log.service';
 import {ToolService} from './tool.service'
 
@@ -12,7 +12,7 @@ export class AddToolFormComponent {
   constructor(
     private log: Logger,
     private toolService: ToolService
-    ) { }
+  ) { }
 
   paramTypes: string[];//参数类别下拉选项
 
@@ -29,7 +29,7 @@ export class AddToolFormComponent {
 
   ngOnInit(): void {
     this.log.debug("init add tool form..");
-    this.toolService.getParamTypes().then((result)=> this.paramTypes = result);
+    this.toolService.getParamTypes().then((result) => this.paramTypes = result);
     // this.paramTypes = ["INT","STRING"];
   }
 
@@ -52,6 +52,12 @@ export class AddToolFormComponent {
     this.log.debug("paramTemp:" + JSON.stringify(this.paramTemp));
     this.log.debug("parameters:" + JSON.stringify(this.parameters));
 
+    //刷新code模板
+    this.template();
+  }
+
+  template(): void {
+    this.toolService.template(this.parameters).then(result => this.code = result);
   }
 
   save(): void {
@@ -64,6 +70,7 @@ export class AddToolFormComponent {
       isPublic: this.isPublic
     }
     this.log.debug("save data: " + JSON.stringify(saveResult));
+    this.toolService.createTool(saveResult).then((result) => this.log.debug("result: " + result));
   }
 
   clickMe(): void {
